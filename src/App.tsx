@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './App.module.scss';
 import { Link } from 'react-router-dom';
 
-function App() {
+const App = () => {
 	return (
 		<div className={styles.root}>
 			<nav className={styles.columns}>
@@ -12,6 +12,6 @@ function App() {
 			</nav>
 		</div>
 	);
-}
+};
 
 export default App;
