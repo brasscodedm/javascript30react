@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import styles from './DrumKit.module.scss';
+import styles from './style.module.css';
 import cx from 'classnames';
 
 import clap from './sounds/clap.wav';
@@ -73,7 +73,7 @@ export const DrumKit = () => {
 	}, []);
 
 	const onTransitionEnd = useCallback((key: string) => {
-		setPlayingKeys(currentState => [...currentState.filter(element => element !== key)]);
+		setPlayingKeys(prevState => [...prevState.filter(el => el !== key)]);
 	}, []);
 
 	useEffect(() => {
