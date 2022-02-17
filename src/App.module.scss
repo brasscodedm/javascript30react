@@ -1,9 +1,29 @@
-.root {
-  height: 100vh;
-}
-
 body,html {
   margin: 0;
-  padding: 0;
   font-family: sans-serif;
+}
+
+.root {
+  height: 100vh;
+  background: #241e49 url(https://s3.amazonaws.com/js30-cdn/sky--purple-kracked.jpg) bottom center no-repeat;
+  background-size: cover;
+  box-sizing: border-box;
+}
+
+.columns {
+  width: 1200px;
+  margin: auto;
+  padding: 150px;
+}
+
+.link {
+  color: #9f9f9f;
+  text-decoration: none;
+  font-size: 2rem;
+  text-transform: uppercase;
+  padding: 12px;
+
+  &:hover {
+    color: #ffffff;
+  }
 }
