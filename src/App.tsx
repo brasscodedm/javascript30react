@@ -7,7 +7,7 @@ const App = () => {
 		<div className={styles.root}>
 			<nav className={styles.columns}>
 				<Link className={styles.link} to={'/drumkit'}>
-					01. Drumkit
+					<div>01. Drumkit</div>
 				</Link>
 			</nav>
 		</div>
