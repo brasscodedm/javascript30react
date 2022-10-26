@@ -22,7 +22,10 @@ export const JsAndCssClock = () => {
 
   useEffect(() => {
     const interval = setInterval(startTime, 1000);
-    return clearInterval(interval);
+
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   return (
