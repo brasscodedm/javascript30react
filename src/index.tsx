@@ -5,10 +5,10 @@ import { BrowserRouter } from 'react-router-dom';
 import { Routing } from './Routing';
 
 ReactDOM.render(
-	<React.StrictMode>
-		<BrowserRouter>
-			<Routing />
-		</BrowserRouter>
-	</React.StrictMode>,
-	document.getElementById('root')
+  <React.StrictMode>
+    <BrowserRouter>
+      <Routing />
+    </BrowserRouter>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
