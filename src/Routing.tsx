@@ -5,9 +5,9 @@ import { DrumKit } from './screens/01-DrumKit/DrumKit';
 import { JsAndCssClock } from './screens/02-Clock/JsAndCssClock';
 
 export const Routing = () => (
-	<Routes>
-		<Route path={'/'} element={<App />} />
-		<Route path={'/drumkit'} element={<DrumKit />} />
-		<Route path={'/clock'} element={<JsAndCssClock />} />
-	</Routes>
+  <Routes>
+    <Route path={'/'} element={<App />} />
+    <Route path={'/drumkit'} element={<DrumKit />} />
+    <Route path={'/clock'} element={<JsAndCssClock />} />
+  </Routes>
 );
