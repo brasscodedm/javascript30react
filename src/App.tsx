@@ -17,6 +17,10 @@ const App = () => {
         <Link className={styles.link} to={'/css-variables'}>
           <div>03. Playing with CSS Variables and JS</div>
         </Link>
+
+        <Link className={styles.link} to={'/array-cardio-1'}>
+          <div>03. Array Cardio Day 1</div>
+        </Link>
       </nav>
     </div>
   );
