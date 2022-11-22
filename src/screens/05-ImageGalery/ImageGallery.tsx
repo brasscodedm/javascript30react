@@ -1,5 +1,5 @@
-import React, { ChangeEvent, TransitionEventHandler, useState } from 'react';
-import styles from './ImageGalery.module.css';
+import React, { useState } from 'react';
+import styles from './ImageGallery.module.css';
 import cx from 'classnames';
 
 const panels = [
@@ -21,29 +21,27 @@ export const ImageGallery = () => {
   };
 
   return (
-    <div className={styles.wrapper}>
-      <div className={cx(styles.panels)}>
-        {panels.map((panel, key) => {
-          const panelName = `panel${key + 1}`;
-          return (
-            <div
-              onClick={() => setActivePanel(panelName)}
-              onTransitionEnd={e => onTransitionEnd(e)}
-              key={key}
-              className={cx(
-                styles.panel,
-                styles[panelName],
-                activePanel === panelName && styles.open,
-                transitionedPanel === panelName && styles.openActive
-              )}
-            >
-              <p>{panel.top}</p>
-              <p>{panel.mid}</p>
-              <p>{panel.bottom}</p>
-            </div>
-          );
-        })}
-      </div>
+    <div className={cx(styles.panels)}>
+      {panels.map((panel, key) => {
+        const panelName = `panel${key + 1}`;
+        return (
+          <div
+            onClick={() => setActivePanel(panelName)}
+            onTransitionEnd={onTransitionEnd}
+            key={key}
+            className={cx(
+              styles.panel,
+              styles[panelName],
+              activePanel === panelName && styles.open,
+              transitionedPanel === panelName && styles.openActive
+            )}
+          >
+            <p>{panel.top}</p>
+            <p>{panel.mid}</p>
+            <p>{panel.bottom}</p>
+          </div>
+        );
+      })}
     </div>
   );
 };

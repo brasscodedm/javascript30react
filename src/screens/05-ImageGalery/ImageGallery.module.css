@@ -1,21 +1,11 @@
-.wrapper {
-  box-sizing: border-box;
-  background: #ffc600;
-  font-family: 'helvetica neue';
-  font-size: 20px;
-  font-weight: 200;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-
 .panels {
   min-height: 100vh;
   overflow: hidden;
   display: flex;
+  background: #ffc600;
+  font-family: 'helvetica neue', serif;
+  font-size: 20px;
+  font-weight: 200;
 }
 
 .panel {
