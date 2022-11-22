@@ -156,17 +156,11 @@ export const ArrayCardio1 = () => {
     'van',
     'car',
     'truck',
-  ];
+  ] as const;
 
-  type Keys = typeof data[number];
-
-  const instances = data.reduce<Record<Keys, number>>(
+  const instances = data.reduce(
     (acc, obj) => {
-      if (!acc[obj]) {
-        acc[obj] = 0;
-      }
       acc[obj]++;
-
       return acc;
     },
     {
