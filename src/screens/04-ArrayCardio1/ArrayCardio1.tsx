@@ -80,7 +80,7 @@ export const ArrayCardio1 = () => {
 
   // Array.prototype.sort()
   // 3. Sort the inventors by birthdate, oldest to youngest
-  const sortedInventors = inventors.sort((inv1, inv2) => (inv2.year > inv1.year ? 1 : -1));
+  const sortedInventors = inventors.sort((inv1, inv2) => inv2.year - inv1.year);
 
   useEffect(() => {
     console.table(sortedInventors);
@@ -107,7 +107,7 @@ export const ArrayCardio1 = () => {
     const yearsInv1 = inv1.passed - inv1.year;
     const yearsInv2 = inv2.passed - inv2.year;
 
-    return yearsInv2 > yearsInv1 ? 1 : -1;
+    return yearsInv2 - yearsInv1;
   });
 
   useEffect(() => {
