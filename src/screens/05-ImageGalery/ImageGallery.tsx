@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 import styles from './ImageGallery.module.css';
 import cx from 'classnames';
 
-const panels = [
+interface Panel {
+  top: string;
+  mid: string;
+  bottom: string;
+}
+
+const panels: Panel[] = [
   { top: 'Hey', mid: `Let's`, bottom: 'Dance' },
   { top: 'Give', mid: 'Take', bottom: 'Receive' },
   { top: 'Experience', mid: 'It', bottom: 'Today' },
@@ -11,12 +17,22 @@ const panels = [
 ];
 
 export const ImageGallery = () => {
-  const [transitionedPanel, setTransitionedPanel] = useState<string | undefined>(undefined);
-  const [activePanel, setActivePanel] = useState<string | undefined>(undefined);
+  const [transitionedPanels, setTransitionedPanels] = useState<string[]>([]);
+  const [activePanels, setActivePanels] = useState<string[]>([]);
 
-  const onTransitionEnd = (event: React.TransitionEvent<HTMLDivElement>) => {
-    if (event.propertyName === 'flex-grow') {
-      setTransitionedPanel(activePanel);
+  const handleClick = (panel: string) => {
+    if (activePanels.includes(panel)) {
+      setActivePanels(prevState => prevState.filter(p => p !== panel));
+    } else {
+      setActivePanels(prevState => [...prevState, panel]);
+    }
+  };
+
+  const handleTransitionEnd = (panel: string) => {
+    if (transitionedPanels.includes(panel)) {
+      setTransitionedPanels(prevState => prevState.filter(p => p !== panel));
+    } else {
+      setTransitionedPanels(prevState => [...prevState, panel]);
     }
   };
 
@@ -26,14 +42,14 @@ export const ImageGallery = () => {
         const panelName = `panel${key + 1}`;
         return (
           <div
-            onClick={() => setActivePanel(panelName)}
-            onTransitionEnd={onTransitionEnd}
+            onClick={() => handleClick(panelName)}
+            onTransitionEnd={() => handleTransitionEnd(panelName)}
             key={key}
             className={cx(
               styles.panel,
               styles[panelName],
-              activePanel === panelName && styles.open,
-              transitionedPanel === panelName && styles.openActive
+              activePanels.includes(panelName) && styles.open,
+              transitionedPanels.includes(panelName) && styles.openActive
             )}
           >
             <p>{panel.top}</p>
