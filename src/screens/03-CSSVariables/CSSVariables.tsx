@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import styles from './CSSVariables.module.css';
+import styles from './style.module.css';
 
 export const CSSVariables = () => {
   const onUpdateProps = ({ target: { value, dataset, name } }: ChangeEvent<HTMLInputElement>) => {

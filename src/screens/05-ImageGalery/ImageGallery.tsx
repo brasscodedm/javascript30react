@@ -1,5 +1,5 @@
-import React, { TransitionEvent, useState } from 'react';
-import styles from './ImageGallery.module.css';
+import React, { useState } from 'react';
+import styles from './style.module.css';
 import cx from 'classnames';
 
 interface Panel {
