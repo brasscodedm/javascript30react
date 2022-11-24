@@ -21,6 +21,9 @@ const App = () => {
         <Link className={styles.link} to={'/array-cardio-1'}>
           <div>03. Array Cardio Day 1</div>
         </Link>
+        <Link className={styles.link} to={'/image-gallery'}>
+          <div>04. Flex Panels Image Gallery</div>
+        </Link>
       </nav>
     </div>
   );
