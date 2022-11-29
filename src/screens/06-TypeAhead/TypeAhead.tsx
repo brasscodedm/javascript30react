@@ -56,7 +56,7 @@ export const TypeAhead = () => {
   useEffect(() => {
     fetch(endpoint)
       .then(response => response.json())
-      .then(data => setCities(data));
+      .then(setCities);
   }, []);
 
   return (
