@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import styles from './style.module.css';
 const endpoint =
   'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
@@ -6,11 +6,16 @@ const endpoint =
 interface City {
   city: string;
   state: string;
+  population: number;
 }
+
+const numbersWithDots = (data: number) => {
+  return data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
 
 export const TypeAhead = () => {
   const [cites, setCities] = useState<City[]>([]);
-  const [value, setValue] = useState<string>('undefined');
+  const [value, setValue] = useState<string | undefined>(undefined);
 
   const onChangeValue = (e: FormEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value.toLowerCase());
@@ -19,20 +24,33 @@ export const TypeAhead = () => {
   const renderEmpty = () => (
     <>
       <li>Filter for a city</li>
-      <li>or a state</li>
+      <li>Or a state</li>
     </>
   );
 
   const renderElements = () => {
-    const results = cites.filter(
-      // show match method
-      place => place.city.toLowerCase().includes(value) || place.state.toLowerCase().includes(value)
-    );
+    if (!value) {
+      return renderEmpty();
+    }
+
+    const regex = new RegExp(value, 'gi');
+    const results = cites.filter(place => place.city.match(regex) || place.state.match(regex));
 
     if (results.length) {
-      return results.map((place, key) => <li key={key}>{place.city}</li>);
+      return results.map((place, key) => {
+        const title = `${place.city}, ${place.state}`.replace(
+          new RegExp(value, 'ig'),
+          match => `<span class="${styles.hl}">${match}</span>`
+        );
+
+        return (
+          <li key={key}>
+            <span dangerouslySetInnerHTML={{ __html: title }} />
+            <span className={styles.population}>{numbersWithDots(place.population)}</span>
+          </li>
+        );
+      });
     }
-    return renderEmpty();
   };
 
   useEffect(() => {
