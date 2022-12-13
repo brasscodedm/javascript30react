@@ -6,6 +6,7 @@ import { JsAndCssClock } from './screens/02-Clock/JsAndCssClock';
 import { CSSVariables } from './screens/03-CSSVariables/CSSVariables';
 import { ArrayCardio1 } from './screens/04-ArrayCardio1/ArrayCardio1';
 import { ImageGallery } from './screens/05-ImageGalery/ImageGallery';
+import { TypeAhead } from './screens/06-TypeAhead/TypeAhead';
 
 export const Routing = () => (
   <Routes>
@@ -15,5 +16,6 @@ export const Routing = () => (
     <Route path={'/css-variables'} element={<CSSVariables />} />
     <Route path={'/array-cardio-1'} element={<ArrayCardio1 />} />
     <Route path={'/image-gallery'} element={<ImageGallery />} />
+    <Route path={'/type-ahead'} element={<TypeAhead />} />
   </Routes>
 );
