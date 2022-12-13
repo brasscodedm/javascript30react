@@ -21,11 +21,17 @@ const App = () => {
         <Link className={styles.link} to={'/array-cardio-1'}>
           <div>04. Array Cardio Day 1</div>
         </Link>
+
         <Link className={styles.link} to={'/image-gallery'}>
           <div>05. Flex Panels Image Gallery</div>
         </Link>
+
         <Link className={styles.link} to={'/type-ahead'}>
           <div>06. Ajax Type Ahead</div>
+        </Link>
+
+        <Link className={styles.link} to={'/array-cardio-2'}>
+          <div>04. Array Cardio Day 2</div>
         </Link>
       </nav>
     </div>

@@ -7,6 +7,7 @@ import { CSSVariables } from './screens/03-CSSVariables/CSSVariables';
 import { ArrayCardio1 } from './screens/04-ArrayCardio1/ArrayCardio1';
 import { ImageGallery } from './screens/05-ImageGalery/ImageGallery';
 import { TypeAhead } from './screens/06-TypeAhead/TypeAhead';
+import { ArrayCardio2 } from './screens/07-ArrayCardio2/ArrayCardio2';
 
 export const Routing = () => (
   <Routes>
@@ -17,5 +18,6 @@ export const Routing = () => (
     <Route path={'/array-cardio-1'} element={<ArrayCardio1 />} />
     <Route path={'/image-gallery'} element={<ImageGallery />} />
     <Route path={'/type-ahead'} element={<TypeAhead />} />
+    <Route path={'/array-cardio-2'} element={<ArrayCardio2 />} />
   </Routes>
 );
