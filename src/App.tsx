@@ -31,7 +31,7 @@ const App = () => {
         </Link>
 
         <Link className={styles.link} to={'/array-cardio-2'}>
-          <div>04. Array Cardio Day 2</div>
+          <div>07. Array Cardio Day 2</div>
         </Link>
       </nav>
     </div>
