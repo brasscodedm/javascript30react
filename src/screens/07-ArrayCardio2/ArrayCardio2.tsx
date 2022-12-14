@@ -25,7 +25,7 @@ export const ArrayCardio2 = () => {
 
   // Array.prototype.every() // is everyone 19 or older?
   useEffect(() => {
-    const isEverybodyAdult = people.some(person => new Date().getFullYear() - person.year >= 19);
+    const isEverybodyAdult = people.every(person => new Date().getFullYear() - person.year >= 19);
     console.log(isEverybodyAdult);
   }, []);
 
