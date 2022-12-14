@@ -45,7 +45,9 @@ export const ArrayCardio2 = () => {
     if (commentIndex > -1) {
       comments.splice(commentIndex, 1);
     }
-    console.table(comments);
+
+    const newComments = [...comments.slice(0, commentIndex), ...comments.slice(commentIndex + 1)];
+    console.table(newComments);
   }, []);
 
   return (
