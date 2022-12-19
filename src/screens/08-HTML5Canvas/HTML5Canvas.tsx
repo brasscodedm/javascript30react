@@ -1,10 +1,12 @@
 import React, { MouseEvent, useEffect, useRef, useState } from 'react';
 
+let direction = true;
+
 export const HTML5Canvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
   const [drawing, setDrawing] = useState(false);
-  const [direction, setDirection] = useState(true);
+  // const [direction, setDirection] = useState(true);
   const [{ lastX, lastY }, setLastPosition] = useState({ lastX: 0, lastY: 0 });
   const [{ lineWidth, hue }, setCanvasConfig] = useState({ lineWidth: 100, hue: 1 });
 
@@ -12,9 +14,13 @@ export const HTML5Canvas = () => {
     if (!drawing || !canvasRef.current) {
       return;
     }
+
     if (ctx) {
       ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+      ctx.fillStyle = `hsl(${hue}, 100%, 50%)`;
+
       ctx.beginPath();
+      ctx.fill();
       ctx.moveTo(lastX, lastY);
       ctx.lineWidth = lineWidth;
 
@@ -35,10 +41,11 @@ export const HTML5Canvas = () => {
       }
 
       if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
-        setDirection(prevState => !prevState);
+        console.log(ctx.lineWidth, ctx.lineWidth, direction);
+
+        direction = !direction;
       }
 
-      console.log(direction, lineWidth);
       if (direction) {
         setCanvasConfig(prevState => ({
           ...prevState,
@@ -73,6 +80,13 @@ export const HTML5Canvas = () => {
       setCtx(canvas.getContext('2d'));
     }
   }, []);
+
+  useEffect(() => {
+    if (ctx) {
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+    }
+  }, [ctx]);
 
   return (
     <canvas
