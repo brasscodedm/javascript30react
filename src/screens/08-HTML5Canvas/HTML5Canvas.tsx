@@ -1,12 +1,10 @@
 import React, { MouseEvent, useEffect, useRef, useState } from 'react';
 
-let direction = true;
-
 export const HTML5Canvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
   const [drawing, setDrawing] = useState(false);
-  // const [direction, setDirection] = useState(true);
+  const [direction, setDirection] = useState(true);
   const [{ lastX, lastY }, setLastPosition] = useState({ lastX: 0, lastY: 0 });
   const [{ lineWidth, hue }, setCanvasConfig] = useState({ lineWidth: 100, hue: 1 });
 
@@ -40,10 +38,8 @@ export const HTML5Canvas = () => {
         }));
       }
 
-      if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
-        console.log(ctx.lineWidth, ctx.lineWidth, direction);
-
-        direction = !direction;
+      if ((ctx.lineWidth >= 100 && direction) || (ctx.lineWidth <= 1 && !direction)) {
+        setDirection(prevState => !prevState);
       }
 
       if (direction) {
