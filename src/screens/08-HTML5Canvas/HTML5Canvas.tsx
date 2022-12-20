@@ -4,61 +4,49 @@ export const HTML5Canvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
   const [drawing, setDrawing] = useState(false);
-  const [direction, setDirection] = useState(true);
-  const [{ lastX, lastY }, setLastPosition] = useState({ lastX: 0, lastY: 0 });
-  const [{ lineWidth, hue }, setCanvasConfig] = useState({ lineWidth: 100, hue: 1 });
+  const [{ lineWidth, hue, lastX, lastY, direction }, setCanvasConfig] = useState({
+    lineWidth: 100,
+    hue: 1,
+    lastX: 0,
+    lastY: 0,
+    direction: false,
+  });
 
   const onDraw = ({ nativeEvent: { offsetX, offsetY } }: MouseEvent<HTMLCanvasElement>) => {
-    if (!drawing || !canvasRef.current) {
+    if (!drawing || !ctx) {
       return;
     }
 
-    if (ctx) {
-      ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-      ctx.fillStyle = `hsl(${hue}, 100%, 50%)`;
+    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
 
-      ctx.beginPath();
-      ctx.fill();
-      ctx.moveTo(lastX, lastY);
-      ctx.lineWidth = lineWidth;
+    ctx.beginPath();
+    ctx.fill();
+    ctx.moveTo(lastX, lastY);
+    ctx.lineWidth = lineWidth;
 
-      ctx.lineTo(offsetX, offsetY);
-      ctx.stroke();
-      setLastPosition({ lastX: offsetX, lastY: offsetY });
+    ctx.lineTo(offsetX, offsetY);
+    ctx.stroke();
 
-      setCanvasConfig(prevState => ({
-        ...prevState,
-        hue: prevState.hue + 1,
-      }));
-
-      if (hue >= 360) {
-        setCanvasConfig(prevState => ({
-          ...prevState,
-          hue: 0,
-        }));
-      }
-
-      if ((ctx.lineWidth >= 100 && direction) || (ctx.lineWidth <= 1 && !direction)) {
-        setDirection(prevState => !prevState);
-      }
-
-      if (direction) {
-        setCanvasConfig(prevState => ({
-          ...prevState,
-          lineWidth: prevState.lineWidth + 1,
-        }));
-      } else {
-        setCanvasConfig(prevState => ({
-          ...prevState,
-          lineWidth: prevState.lineWidth - 1,
-        }));
-      }
-    }
+    setCanvasConfig(prevState => ({
+      ...prevState,
+      hue: hue >= 360 ? 0 : prevState.hue + 1,
+      lineWidth: prevState.lineWidth + (direction ? 1 : -1),
+      lastX: offsetX,
+      lastY: offsetY,
+      direction:
+        (ctx.lineWidth >= 100 && direction) || (ctx.lineWidth <= 1 && !direction)
+          ? !prevState.direction
+          : prevState.direction,
+    }));
   };
 
   const startDraw = ({ nativeEvent: { offsetX, offsetY } }: MouseEvent<HTMLCanvasElement>) => {
     setDrawing(true);
-    setLastPosition({ lastX: offsetX, lastY: offsetY });
+    setCanvasConfig(prevState => ({
+      ...prevState,
+      lastX: offsetX,
+      lastY: offsetY,
+    }));
   };
 
   const stopDraw = () => {
