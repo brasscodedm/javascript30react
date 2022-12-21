@@ -91,6 +91,7 @@ export const ArrayCardio1 = () => {
   let total = 0;
 
   for (let i = 0; i < inventors.length; i++) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     total += inventors[i].year;
   }
 
@@ -119,6 +120,7 @@ export const ArrayCardio1 = () => {
 
   const category = document.querySelector('.mw-category');
   const links = category && Array.from(category.querySelectorAll('a'));
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const de =
     links &&
     links

@@ -33,6 +33,10 @@ const App = () => {
         <Link className={styles.link} to={'/array-cardio-2'}>
           <div>07. Array Cardio Day 2</div>
         </Link>
+
+        <Link className={styles.link} to={'/html5-canvas'}>
+          <div>08. Fun with HTML5 Canvas</div>
+        </Link>
       </nav>
     </div>
   );
