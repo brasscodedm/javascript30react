@@ -37,8 +37,13 @@ const App = () => {
         <Link className={styles.link} to={'/html5-canvas'}>
           <div>08. Fun with HTML5 Canvas</div>
         </Link>
+
         <Link className={styles.link} to={'/dev-tools'}>
           <div>09. Dev Tools</div>
+        </Link>
+
+        <Link className={styles.link} to={'/multiple-checkbox'}>
+          <div>10.Multiple Checkbox</div>
         </Link>
       </nav>
     </div>

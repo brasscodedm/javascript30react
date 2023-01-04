@@ -10,6 +10,7 @@ import { TypeAhead } from './screens/06-TypeAhead/TypeAhead';
 import { ArrayCardio2 } from './screens/07-ArrayCardio2/ArrayCardio2';
 import { HTML5Canvas } from './screens/08-HTML5Canvas/HTML5Canvas';
 import { DevTools } from './screens/09-DEV-Tools/DevTools';
+import { MultipleCheckbox } from './screens/10-MultipleCheckbox/MultipleCheckbox';
 
 export const Routing = () => (
   <Routes>
@@ -23,5 +24,6 @@ export const Routing = () => (
     <Route path={'/array-cardio-2'} element={<ArrayCardio2 />} />
     <Route path={'/html5-canvas'} element={<HTML5Canvas />} />
     <Route path={'/dev-tools'} element={<DevTools />} />
+    <Route path={'/multiple-checkbox'} element={<MultipleCheckbox />} />
   </Routes>
 );

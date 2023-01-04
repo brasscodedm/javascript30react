@@ -39,7 +39,14 @@ export const CSSVariables = () => {
         />
 
         <label htmlFor="base">Base Color</label>
-        <input id="base" type="color" name="base" defaultValue="#ffc600" onChange={onUpdateProps} />
+        <input
+          className={styles.input}
+          id="base"
+          type="color"
+          name="base"
+          defaultValue="#ffc600"
+          onChange={onUpdateProps}
+        />
       </div>
 
       <img className={styles.image} src="https://source.unsplash.com/7bwQXzbF6KE/800x500" />
