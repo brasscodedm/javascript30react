@@ -2,46 +2,38 @@ import React, { useEffect, useState } from 'react';
 import styles from './style.module.css';
 
 interface Input {
-  id: number;
   label: string;
   isChecked: boolean;
 }
 
 const initItems: Input[] = [
   {
-    id: 1,
     label: 'This is an inbox layout.',
     isChecked: false,
   },
-  { id: 2, label: 'Check one item', isChecked: false },
-  { id: 3, label: 'Hold down your Shift key', isChecked: false },
+  { label: 'Check one item', isChecked: false },
+  { label: 'Hold down your Shift key', isChecked: false },
   {
-    id: 4,
     label: 'Check a lower item',
     isChecked: false,
   },
   {
-    id: 5,
     label: 'Everything in between should also be set to checked',
     isChecked: false,
   },
   {
-    id: 6,
     label: 'Try to do it without any libraries',
     isChecked: false,
   },
   {
-    id: 7,
     label: 'Just regular JavaScript',
     isChecked: false,
   },
   {
-    id: 8,
     label: 'Good Luck!',
     isChecked: false,
   },
   {
-    id: 9,
     label: "Don't forget to tweet your result!",
     isChecked: false,
   },
@@ -50,48 +42,39 @@ const initItems: Input[] = [
 export const MultipleCheckbox = () => {
   const [items, setItems] = useState(initItems);
   const [shiftOn, setShiftOn] = useState(false);
-  const [lastCheckedId, setLastCheckedId] = useState<number | null>(null);
+  const [lastCheckedKey, setLastCheckedKey] = useState<number | null>(null);
 
   useEffect(() => {
-    const handleKeyDown = () => {
-      setShiftOn(true);
-    };
-    document.addEventListener('keydown', handleKeyDown);
+    const handleKeyDown = () => setShiftOn(true);
+    const handleKeyUp = () => setShiftOn(false);
 
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keyup', handleKeyUp);
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleKeyUp = () => {
-      setShiftOn(false);
-    };
-    document.addEventListener('keyup', handleKeyUp);
-
-    return () => {
       document.removeEventListener('keyup', handleKeyUp);
     };
   }, []);
 
-  useEffect(() => {
-    console.log(shiftOn);
-  }, [shiftOn]);
-
-  const handleInputClick = (id: number) => {
+  const handleInputClick = (key: number) => {
     const updatedItems = items.map(item => {
-      if (item.id === id) {
+      const itemIndex = items.indexOf(item);
+
+      if (itemIndex === key) {
         return {
           ...item,
           isChecked: !item.isChecked,
         };
       }
 
-      if (!shiftOn || !lastCheckedId) {
+      if (!shiftOn || lastCheckedKey === null) {
         return item;
       }
 
-      if ((item.id > lastCheckedId && item.id < id) || (item.id < lastCheckedId && item.id > id)) {
+      if (
+        (itemIndex > lastCheckedKey && itemIndex < key) ||
+        (itemIndex < lastCheckedKey && itemIndex > key)
+      ) {
         return {
           ...item,
           isChecked: !item.isChecked,
@@ -101,18 +84,18 @@ export const MultipleCheckbox = () => {
       return item;
     });
 
-    setLastCheckedId(id);
+    setLastCheckedKey(key);
     setItems(updatedItems);
   };
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.inbox}>
-        {items.map(({ id, isChecked, label }: Input) => (
-          <div key={id} className={styles.item}>
+        {items.map(({ isChecked, label }: Input, key) => (
+          <div key={key} className={styles.item}>
             <input
               checked={isChecked}
-              onClick={() => handleInputClick(id)}
+              onClick={() => handleInputClick(key)}
               className={styles.input}
               type="checkbox"
             />
